@@ -17,7 +17,8 @@ class CreateCarsTable extends Migration
             $table->increments('id');
             $table->string('model');
             $table->string('status');
-            $table->integer('storage_id');
+            $table->integer('storage_id')->unsigned();
+            $table->foreign('storage_id')->references('id')->on('storages')->onDelete('cascade');
             $table->timestamps();
         });
     }

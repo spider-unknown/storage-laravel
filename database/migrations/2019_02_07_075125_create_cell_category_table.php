@@ -15,8 +15,10 @@ class CreateCellCategoryTable extends Migration
     {
         Schema::create('cell_category', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('cell_id');
-            $table->integer('category_id');
+            $table->integer('cell_id')->unsigned();
+            $table->foreign('cell_id')->references('id')->on('cells')->onDelete('cascade');
+            $table->integer('category_id')->unsigned();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -5,6 +5,9 @@
     <div class="card card-default">
         <div class="card-header">
             Types
+            <a href="{{ route('type.create') }}" class="btn btn-xs btn-success" style="float:right">
+                <span class="fa fa-plus fa-lg"></span>
+            </a>
         </div>
         <div class="card-body">
             <table class=" table table-hover">

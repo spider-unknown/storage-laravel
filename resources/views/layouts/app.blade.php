@@ -20,6 +20,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
+    @yield('styles');
 
 </head>
 <body>
@@ -51,25 +52,25 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                            @else
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->name }} <span class="caret"></span>
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
+                                @endguest
                     </ul>
                 </div>
             </div>
@@ -106,24 +107,6 @@
                                     <li class="list-group-item">
                                         <a href="{{ route('cars.index') }}">Cars</a>
                                     </li>
-                                    <li class="list-group-item">
-                                        <a href="{{ route('category.create') }}">Category create</a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <a href="{{ route('type.create') }}">Type create</a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <a href="{{ route('product.create') }}">Product create</a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <a href="{{ route('cell.create') }}">Cell create</a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <a href="{{ route('storage.create') }}">Storage create</a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <a href="{{ route('car.create') }}">Car create</a>
-                                    </li>
                                 </ul>
                             </div>
                         @endif
@@ -136,7 +119,6 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" ></script>
     <script src="{{ asset('js/toastr.min.js') }}" ></script>
     <script>
         toastr.options.closeButton = true;
