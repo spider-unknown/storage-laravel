@@ -15,8 +15,10 @@ class CreateCarTypeTable extends Migration
     {
         Schema::create('car_type', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('car_id');
-            $table->integer('type_id');
+            $table->integer('car_id')->unsigned();
+            $table->foreign('car_id')->references('id')->on('cars')->onDelete('cascade');
+            $table->integer('type_id')->unsigned();
+            $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
             $table->timestamps();
         });
     }

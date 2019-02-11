@@ -16,9 +16,17 @@ class CreateCellsTable extends Migration
         Schema::create('cells', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('storage_id');
+            $table->integer('storage_id')->unsigned();
+            $table->foreign('storage_id')
+                ->references('id')
+                ->on('storages')
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
+
+
+
     }
 
     /**

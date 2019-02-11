@@ -15,8 +15,10 @@ class CreateCellTypeTable extends Migration
     {
         Schema::create('cell_type', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('cell_id');
-            $table->integer('type_id');
+            $table->integer('cell_id')->unsigned();
+            $table->foreign('cell_id')->references('id')->on('cells')->onDelete('cascade');
+            $table->integer('type_id')->unsigned();
+            $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
             $table->timestamps();
         });
     }

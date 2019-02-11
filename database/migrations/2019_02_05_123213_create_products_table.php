@@ -21,7 +21,9 @@ class CreateProductsTable extends Migration
             $table->double('width');
             $table->double('height');
             $table->double('depth');
-            $table->integer('category_id');
+            $table->integer('category_id')->unsigned();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+
             $table->softDeletes();
             $table->timestamps();
         });

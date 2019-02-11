@@ -5,6 +5,11 @@
     <div class="card card-default">
         <div class="card-header">
             Cars
+            <a href="{{ route('car.create') }}" class="btn btn-xs btn-success" style="float:right">
+                <span class="fa fa-plus fa-lg"></span>
+            </a>
+
+
         </div>
         <div class="card-body">
             <table class=" table table-hover">

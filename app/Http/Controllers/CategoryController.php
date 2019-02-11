@@ -103,12 +103,8 @@ class CategoryController extends Controller
     public function destroy($id)
     {
 //        if(Auth::user()->admin){
-            $category = Category::find($id);
-            foreach ($category->products as $product)
-            {
-                $product->forceDelete();
-            }
-            $category->delete();
+            Category::destroy($id);
+
             Session::flash('success' , 'You successfully deleted category!');
 //        }else{
 //            Session::flash('error' , 'You do not have enough permisison!');
