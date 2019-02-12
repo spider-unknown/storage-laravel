@@ -17,7 +17,6 @@
                 <th>Delete</th>
                 </thead>
                 <tbody>
-                @if($cells->count()>0)
                     @foreach($cells as $cell)
                         <tr>
                             <td>
@@ -35,11 +34,6 @@
                             </td>
                         </tr>
                     @endforeach
-                @else
-                    <tr>
-                        <th colspan="3">No cells yet!</th>
-                    </tr>
-                @endif
                 </tbody>
             </table>
         </div>

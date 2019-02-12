@@ -20,7 +20,6 @@
                 <th>Delete</th>
                 </thead>
                 <tbody>
-                @if($cars->count()>0)
                     @foreach($cars as $car)
                         <tr>
                             <td>
@@ -41,11 +40,6 @@
                             </td>
                         </tr>
                     @endforeach
-                @else
-                    <tr>
-                        <th colspan="3">No cars yet!</th>
-                    </tr>
-                @endif
                 </tbody>
             </table>
         </div>

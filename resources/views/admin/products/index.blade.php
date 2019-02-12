@@ -18,7 +18,6 @@
                 <th>Delete</th>
                 </thead>
                 <tbody>
-                @if($products->count()>0)
                     @foreach($products as $product)
                         <tr>
                             <td>
@@ -39,11 +38,6 @@
                             </td>
                         </tr>
                     @endforeach
-                @else
-                    <tr>
-                        <th colspan="3">No products yet!</th>
-                    </tr>
-                @endif
                 </tbody>
             </table>
         </div>

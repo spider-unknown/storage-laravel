@@ -18,7 +18,6 @@
                 <th>Delete</th>
                 </thead>
                 <tbody>
-                @if($storages->count()>0)
                     @foreach($storages as $storage)
                         <tr>
                             <td>
@@ -40,11 +39,6 @@
                             </td>
                         </tr>
                     @endforeach
-                @else
-                    <tr>
-                        <th colspan="3">No storages yet!</th>
-                    </tr>
-                @endif
                 </tbody>
             </table>
         </div>

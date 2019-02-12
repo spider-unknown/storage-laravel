@@ -18,7 +18,6 @@
                 <th>Delete</th>
                 </thead>
                 <tbody>
-                @if($types->count()>0)
                     @foreach($types as $type)
                         <tr>
                             <td>
@@ -39,11 +38,6 @@
                             </td>
                         </tr>
                     @endforeach
-                @else
-                    <tr>
-                        <th colspan="3">No types yet!</th>
-                    </tr>
-                @endif
                 </tbody>
             </table>
         </div>

@@ -58,31 +58,31 @@
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="{{route('products.index')}}">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-fw fa-list-alt"></i>
                     <span>Products</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{route('category.index')}}">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-fw fa-list"></i>
                     <span>Categories</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{route('type.index')}}">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-fw fa-adjust"></i>
                     <span>Types</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{route('storage.index')}}">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-fw fa-archive"></i>
                     <span>Storages</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{route('cars.index')}}">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-fw fa-car"></i>
                     <span>Cars</span></a>
             </li>
 
