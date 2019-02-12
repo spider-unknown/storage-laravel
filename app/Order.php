@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $fillable = ['location','way_long','car_id','product_id'];
+    protected $fillable = ['location','way_long','car_id'];
 
 
-    public function product()
+    public function products()
     {
-        return $this->belongsTo('App\Product');
+        return $this->belongsToMany('App\Product');
     }
 
     public function car()

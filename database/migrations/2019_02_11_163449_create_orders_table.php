@@ -17,8 +17,6 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->integer('car_id')->unsigned();
             $table->foreign('car_id')->references('id')->on('cars');
-            $table->integer('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products');
             $table->string('location');
             $table->double('way_long');
             $table->timestamps();

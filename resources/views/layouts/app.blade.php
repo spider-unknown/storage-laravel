@@ -15,14 +15,14 @@
     <link rel="stylesheet" type="text/css" href="{{asset('app/vendor/fontawesome-free/css/all.min.css')}}">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
-    <link href="{{asset('app/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link rel="stylesheet" type="text/css" href="{{asset('app/css/sb-admin-2.min.css')}}">
     <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
-    <link href="{{ asset('app/vendor/datatables/datatable.resp.css')}}"  rel="stylesheet"/>
+    <link href="{{ asset('app/vendor/datatables/datatable.resp.css')}}" rel="stylesheet"/>
+    <link href="{{asset('app/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
 
     @yield('styles')
 </head>
@@ -36,9 +36,9 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('home')}}">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <i class="fas fa-truck-moving"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">SB Admin</div>
             </a>
@@ -48,7 +48,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="{{route('home')}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -90,6 +90,26 @@
                 <a class="nav-link" href="{{route('cells.index')}}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Cells</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('orders.index')}}">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Orders</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('users.index')}}">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Users</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('permissions.index')}}">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Permissions</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('roles.index')}}">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Roles</span></a>
             </li>
 
             <!-- Divider -->
@@ -134,8 +154,8 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->name }}</span>
-                                <img class="img-profile rounded-circle"
-                                     src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                                <i class="fas fa-user-circle"></i>
+
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -253,7 +273,7 @@
 
 </script>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('#dataTable').DataTable({
             responsive: true,
         });

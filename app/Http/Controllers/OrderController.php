@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Car;
 use App\Order;
+use App\Product;
 use Illuminate\Http\Request;
+use Session;
 
 class OrderController extends Controller
 {
@@ -24,8 +27,17 @@ class OrderController extends Controller
      */
     public function create()
     {
+        $products = Product::all();
+        $cars = Car::all();
+
+        if($products->count() == 0 || $cars->count() == 0){
+            Session::flash('info' , 'You must have some product and car!');
+            return redirect()->back();
+        }
+        return view('admin.orders.create', compact('products', 'cars'));
 
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -35,7 +47,23 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'car_id' => 'required',
+            'location' => 'required',
+            'way_long' => 'required',
+        ]);
+
+        $order = Order::create([
+            'location' => $request->location,
+            'way_long' => $request->way_long,
+            'car_id' => $request->car_id,
+
+        ]);
+
+        $order->products() ->attach($request->products);
+
+        Session::flash('success','Order created successfully!');
+        return redirect()->route('orders.index');
     }
 
     /**

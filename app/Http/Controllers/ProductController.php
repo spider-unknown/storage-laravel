@@ -10,8 +10,12 @@ use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\URL;
 
-class ProductsController extends Controller
+class ProductController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware(['auth', 'clearance'])->except('index', 'show');
+    }
     /**
      * Display a listing of the resource.
      *
