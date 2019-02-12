@@ -6,13 +6,14 @@
         <div class="card-header">
             Categories
             <a href="{{ route('category.create') }}" class="btn btn-xs btn-success" style="float:right">
-                <span class="fa fa-plus fa-lg"></span>
+                <span class="fa fa-plus"></span>
             </a>
         </div>
-        <div class="card-body">
-            <table class=" table table-hover">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                 <th>Category name</th>
+                <th>Price</th>
                 <th>Edit</th>
                 <th>Delete</th>
                 </thead>
@@ -24,8 +25,11 @@
                                 {{$category->name}}
                             </td>
                             <td>
+                                {{$category->price}}
+                            </td>
+                            <td>
                                 <a href="{{route('category.edit' , ['id' => $category->id]) }}" class="btn btn-xs btn-info">
-                                    <span class="fa fa-pencil"></span>
+                                    <span class="fa fa-pen"></span>
                                 </a>
                             </td>
                             <td>

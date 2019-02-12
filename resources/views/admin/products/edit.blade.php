@@ -34,6 +34,18 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="form-group">
+                    <label for="cell">Select a cell</label>
+                    <select id="cell" name="cell_id" class="form-control">
+                        @foreach($cells as $cell)
+                            @if( $cell->id == $product->cell_id )
+                                <option selected value="{{$cell->id}}">{{$cell->name}}</option>
+                            @else
+                                <option value="{{$cell->id}}">{{$cell->name}}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
 
                 <div class="form-check">
                     <label for="types" >Select types</label>

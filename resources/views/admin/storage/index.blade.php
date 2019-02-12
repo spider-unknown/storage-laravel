@@ -6,11 +6,11 @@
         <div class="card-header">
             Storages
             <a href="{{ route('storage.create') }}" class="btn btn-xs btn-success" style="float:right">
-                <span class="fa fa-plus fa-lg"></span>
+                <span class="fa fa-plus"></span>
             </a>
         </div>
-        <div class="card-body">
-            <table class=" table table-hover">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                 <th>Name</th>
                 <th>Address</th>
@@ -30,7 +30,7 @@
                             </td>
                             <td>
                                 <a href="{{route('storage.edit' , ['id' => $storage->id]) }}" class="btn btn-xs btn-info">
-                                    <span class="fa fa-pencil"></span>
+                                    <span class="fa fa-pen"></span>
                                 </a>
                             </td>
                             <td>

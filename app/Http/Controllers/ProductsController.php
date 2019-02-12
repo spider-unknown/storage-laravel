@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cell;
 use App\Product;
 use App\Type;
 use App\Category;
@@ -39,7 +40,8 @@ class ProductsController extends Controller
 
         return view('admin.products.create')
             ->with('categories',$categories)
-            ->with('types' , Type::all());
+            ->with('types' , Type::all())
+            ->with('cells', Cell::all());
     }
 
     /**
@@ -59,6 +61,7 @@ class ProductsController extends Controller
             'width' => 'required',
             'height' => 'required',
             'depth' => 'required',
+            'cell_id' => 'required',
         ]);
 
         $image = $request->image;
@@ -72,6 +75,7 @@ class ProductsController extends Controller
             'height' => $request->height,
             'depth' => $request->depth,
             'category_id' => $request->category_id,
+            'cell_id' => $request->cell_id,
             'image' => 'uploads/products/' . $image_new_name
 
         ]);
@@ -114,7 +118,8 @@ class ProductsController extends Controller
             ->with([
                 'product' => $product,
                 'categories' => $categories,
-                'types' => Type::all()
+                'types' => Type::all(),
+                'cells' => Cell::all(),
             ]);
     }
 
@@ -133,6 +138,7 @@ class ProductsController extends Controller
             'name' => 'required|max:255',
             'code' => 'required',
             'category_id' => 'required',
+            'cell_id' => 'required',
             'types' =>'required',
             'image' => 'required|image',
             'width' => 'required',
@@ -154,6 +160,7 @@ class ProductsController extends Controller
         $product->height=$request->height;
         $product->depth=$request->depth;
         $product->category_id=$request->category_id;
+        $product->cell_id=$request->cell_id;
         $product->types()->sync($request->types);
         $product->save();
 

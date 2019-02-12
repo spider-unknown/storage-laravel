@@ -40,11 +40,13 @@ class TypeController extends Controller
     {
 
         $this->validate($request, [
-            'name' =>'required'
+            'name' =>'required',
+            'price' => 'required',
         ]);
 
         $type = new Type;
         $type->name = $request->name;
+        $type->price = $request->price;
         $type->save();
         Session::flash('success' , 'You successfully created type!');
         return redirect()->route('type.index');
@@ -84,10 +86,12 @@ class TypeController extends Controller
     {
         $this->validate($request,[
             'name'=>'required',
+            'price' => 'required',
         ]);
 
         $type = Type::findOrFail($id);
         $type->name = $request->name;
+        $type->price = $request->price;
         $type->save();
 
         Session::flash('success', 'Type successfully updated');
