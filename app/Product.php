@@ -11,7 +11,7 @@ class Product extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'image','name' , 'code' ,'width','height','depth','category_id',
+        'image','name' , 'code' ,'width','height','depth','category_id','cell_id'
     ];
 
     protected $dates = [
@@ -25,5 +25,10 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo('App\Category');
+    }
+
+    public function orders()
+    {
+        return $this->belongsToMany('App\Order');
     }
 }

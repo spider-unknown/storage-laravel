@@ -15,250 +15,259 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Route::get('/index', function () {
+    return view('layouts/index');
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes();
 
-Route::get('/categories',[
 
-    'uses' => 'CategoryController@index',
-    'as' => 'category.index'
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
 
-]);
 
-Route::get('/category/create',[
 
-    'uses' => 'CategoryController@create',
-    'as' => 'category.create',
 
-]);
+    Route::get('/categories', [
 
-Route::post('/category/store',[
+        'uses' => 'CategoryController@index',
+        'as' => 'category.index'
 
-    'uses' => 'CategoryController@store',
-    'as' => 'category.store',
+    ]);
 
-]);
+    Route::get('/category/create', [
 
+        'uses' => 'CategoryController@create',
+        'as' => 'category.create',
 
-Route::get('/category/delete/{id}',[
+    ]);
 
-    'uses' => 'CategoryController@destroy',
-    'as' => 'category.delete',
+    Route::post('/category/store', [
 
-]);
+        'uses' => 'CategoryController@store',
+        'as' => 'category.store',
 
+    ]);
 
-Route::get('/category/edit/{id}',[
 
-    'uses' => 'CategoryController@edit',
-    'as' => 'category.edit',
+    Route::get('/category/delete/{id}', [
 
-]);
+        'uses' => 'CategoryController@destroy',
+        'as' => 'category.delete',
 
+    ]);
 
-Route::post('/category/update/{id}',[
 
-    'uses' => 'CategoryController@update',
-    'as' => 'category.update',
+    Route::get('/category/edit/{id}', [
 
-]);
+        'uses' => 'CategoryController@edit',
+        'as' => 'category.edit',
 
-Route::get('/types',[
+    ]);
 
-    'uses' => 'TypeController@index',
-    'as' => 'type.index'
 
-]);
+    Route::post('/category/update/{id}', [
 
-Route::get('/type/create',[
+        'uses' => 'CategoryController@update',
+        'as' => 'category.update',
 
-    'uses' => 'TypeController@create',
-    'as' => 'type.create'
+    ]);
 
-]);
+    Route::get('/types', [
 
-Route::post('/type/store',[
+        'uses' => 'TypeController@index',
+        'as' => 'type.index'
 
-    'uses' => 'TypeController@store',
-    'as' => 'type.store'
+    ]);
 
-]);
+    Route::get('/type/create', [
 
+        'uses' => 'TypeController@create',
+        'as' => 'type.create'
 
-Route::get('/type/edit/{id}',[
+    ]);
 
-    'uses' => 'TypeController@edit',
-    'as' => 'type.edit'
+    Route::post('/type/store', [
 
-]);
+        'uses' => 'TypeController@store',
+        'as' => 'type.store'
 
+    ]);
 
-Route::post('/type/update/{id}',[
 
-    'uses' => 'TypeController@update',
-    'as' => 'type.update'
+    Route::get('/type/edit/{id}', [
 
-]);
+        'uses' => 'TypeController@edit',
+        'as' => 'type.edit'
 
+    ]);
 
-Route::get('/type/delete/{id}',[
 
-    'uses' => 'TypeController@destroy',
-    'as' => 'type.delete'
+    Route::post('/type/update/{id}', [
 
-]);
+        'uses' => 'TypeController@update',
+        'as' => 'type.update'
 
-Route::get('/products',[
+    ]);
 
-    'uses' => 'ProductsController@index',
-    'as' => 'products.index'
 
-]);
+    Route::get('/type/delete/{id}', [
 
-Route::get('/product/create',[
+        'uses' => 'TypeController@destroy',
+        'as' => 'type.delete'
 
-    'uses' => 'ProductsController@create',
-    'as' => 'product.create'
+    ]);
 
-]);
+    Route::get('/products', [
 
-Route::post('/product/store',[
+        'uses' => 'ProductsController@index',
+        'as' => 'products.index'
 
-    'uses' => 'ProductsController@store',
-    'as' => 'product.store'
+    ]);
 
-]);
+    Route::get('/product/create', [
 
-Route::get('/product/delete/{id}',[
+        'uses' => 'ProductsController@create',
+        'as' => 'product.create'
 
-    'uses' => 'ProductsController@destroy',
-    'as' => 'product.delete',
+    ]);
 
-]);
+    Route::post('/product/store', [
 
+        'uses' => 'ProductsController@store',
+        'as' => 'product.store'
 
-Route::get('/product/kill/{id}',[
+    ]);
 
-    'uses' => 'ProductsController@kill',
-    'as' => 'product.kill',
+    Route::get('/product/delete/{id}', [
 
-]);
+        'uses' => 'ProductsController@destroy',
+        'as' => 'product.delete',
 
-Route::get('/product/trashed',[
-    'uses' => 'ProductsController@trashed',
-    'as' => 'products.trashed'
-]);
+    ]);
 
 
-Route::get('/product/restore/{id}',[
-    'uses' => 'ProductsController@restore',
-    'as' => 'product.restore'
-]);
+    Route::get('/product/kill/{id}', [
 
-Route::get('/product/edit/{id}',[
-    'uses' => 'ProductsController@edit',
-    'as' => 'product.edit'
-]);
+        'uses' => 'ProductsController@kill',
+        'as' => 'product.kill',
 
-Route::post('/product/update/{id}',[
-    'uses' => 'ProductsController@update',
-    'as' => 'product.update'
-]);
+    ]);
 
+    Route::get('/product/trashed', [
+        'uses' => 'ProductsController@trashed',
+        'as' => 'products.trashed'
+    ]);
 
-Route::post('/cell/store',[
-    'uses' => 'CellController@store',
-    'as' => 'cell.store'
-]);
 
+    Route::get('/product/restore/{id}', [
+        'uses' => 'ProductsController@restore',
+        'as' => 'product.restore'
+    ]);
 
-Route::get('/cell/create',[
-    'uses' => 'CellController@create',
-    'as' => 'cell.create'
-]);
+    Route::get('/product/edit/{id}', [
+        'uses' => 'ProductsController@edit',
+        'as' => 'product.edit'
+    ]);
 
-Route::get('/cells',[
-    'uses' => 'CellController@index',
-    'as' => 'cells.index'
-]);
+    Route::post('/product/update/{id}', [
+        'uses' => 'ProductsController@update',
+        'as' => 'product.update'
+    ]);
 
-Route::get('/cells/edit/{id}',[
-    'uses' => 'CellController@edit',
-    'as' => 'cell.edit'
-]);
 
+    Route::post('/cell/store', [
+        'uses' => 'CellController@store',
+        'as' => 'cell.store'
+    ]);
 
-Route::post('/cells/update/{id}',[
-    'uses' => 'CellController@update',
-    'as' => 'cell.update'
-]);
 
-Route::get('/cells/delete/{id}',[
-    'uses' => 'CellController@destroy',
-    'as' => 'cell.delete'
-]);
+    Route::get('/cell/create', [
+        'uses' => 'CellController@create',
+        'as' => 'cell.create'
+    ]);
 
-Route::get('/storages',[
-    'uses' => 'StorageController@index',
-    'as' => 'storage.index'
-]);
+    Route::get('/cells', [
+        'uses' => 'CellController@index',
+        'as' => 'cells.index'
+    ]);
 
-Route::get('/storages/create',[
-    'uses' => 'StorageController@create',
-    'as' => 'storage.create'
-]);
+    Route::get('/cells/edit/{id}', [
+        'uses' => 'CellController@edit',
+        'as' => 'cell.edit'
+    ]);
 
-Route::post('/storages/store',[
-    'uses' => 'StorageController@store',
-    'as' => 'storage.store'
-]);
 
-Route::post('/storages/update/{id}',[
-    'uses' => 'StorageController@update',
-    'as' => 'storage.update'
-]);
+    Route::post('/cells/update/{id}', [
+        'uses' => 'CellController@update',
+        'as' => 'cell.update'
+    ]);
 
-Route::get('/storages/edit/{id}',[
-    'uses' => 'StorageController@edit',
-    'as' => 'storage.edit'
-]);
+    Route::get('/cells/delete/{id}', [
+        'uses' => 'CellController@destroy',
+        'as' => 'cell.delete'
+    ]);
 
-Route::get('/storages/delete/{id}',[
-    'uses' => 'StorageController@destroy',
-    'as' => 'storage.delete'
-]);
+    Route::get('/storages', [
+        'uses' => 'StorageController@index',
+        'as' => 'storage.index'
+    ]);
 
-Route::get('/cars',[
-    'uses' => 'CarController@index',
-    'as' => 'cars.index'
-]);
+    Route::get('/storages/create', [
+        'uses' => 'StorageController@create',
+        'as' => 'storage.create'
+    ]);
 
-Route::get('/car/create',[
-    'uses' => 'CarController@create',
-    'as' => 'car.create'
-]);
+    Route::post('/storages/store', [
+        'uses' => 'StorageController@store',
+        'as' => 'storage.store'
+    ]);
 
-Route::post('/car/store',[
-    'uses' => 'CarController@store',
-    'as' => 'car.store'
-]);
+    Route::post('/storages/update/{id}', [
+        'uses' => 'StorageController@update',
+        'as' => 'storage.update'
+    ]);
 
-Route::get('/car/edit/{id}',[
-    'uses' => 'CarController@edit',
-    'as' => 'car.edit',
-]);
+    Route::get('/storages/edit/{id}', [
+        'uses' => 'StorageController@edit',
+        'as' => 'storage.edit'
+    ]);
 
+    Route::get('/storages/delete/{id}', [
+        'uses' => 'StorageController@destroy',
+        'as' => 'storage.delete'
+    ]);
 
-Route::post('/car/update/{id}',[
-    'uses' => 'CarController@update',
-    'as' => 'car.update',
-]);
+    Route::get('/cars', [
+        'uses' => 'CarController@index',
+        'as' => 'cars.index'
+    ]);
 
-Route::get('/car/delete/{id}',[
-    'uses' => 'CarController@destroy',
-    'as' => 'car.delete',
+    Route::get('/car/create', [
+        'uses' => 'CarController@create',
+        'as' => 'car.create'
+    ]);
 
-]);
+    Route::post('/car/store', [
+        'uses' => 'CarController@store',
+        'as' => 'car.store'
+    ]);
 
+    Route::get('/car/edit/{id}', [
+        'uses' => 'CarController@edit',
+        'as' => 'car.edit',
+    ]);
 
+
+    Route::post('/car/update/{id}', [
+        'uses' => 'CarController@update',
+        'as' => 'car.update',
+    ]);
+
+    Route::get('/car/delete/{id}', [
+        'uses' => 'CarController@destroy',
+        'as' => 'car.delete',
+
+    ]);
+
+});

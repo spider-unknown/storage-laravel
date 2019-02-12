@@ -17,6 +17,10 @@
                     <label for="title">Name</label>
                     <input type="text" name='name' value="{{$type->name}}" class="form-control">
                 </div>
+                <div class="form-group">
+                    <label for="title">Price</label>
+                    <input type="text" name='price' value="{{$type->price}}" class="form-control">
+                </div>
 
                 <div class="form-group">
                     <div class="text-center">

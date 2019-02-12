@@ -31,6 +31,15 @@
                     </select>
                 </div>
 
+                <div class="form-group">
+                    <label for="category">Select a cell</label>
+                    <select id="category" name="cell_id" class="form-control">
+                        @foreach($cells as $cell)
+                            <option value="{{$cell->id}}">{{$cell->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <div class="form-check">
                     <label for="types" >Select types</label>
                     @foreach($types as $type)

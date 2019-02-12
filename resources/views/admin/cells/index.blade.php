@@ -6,11 +6,11 @@
         <div class="card-header">
             Cells
             <a href="{{ route('cell.create') }}" class="btn btn-xs btn-success" style="float:right">
-                <span class="fa fa-plus fa-lg"></span>
+                <span class="fa fa-plus fa"></span>
             </a>
         </div>
-        <div class="card-body">
-            <table class=" table table-hover">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                 <th>Cell name</th>
                 <th>Edit</th>
@@ -25,7 +25,7 @@
                             </td>
                             <td>
                                 <a href="{{route('cell.edit' , ['id' => $cell->id]) }}" class="btn btn-xs btn-info">
-                                    <span class="fa fa-pencil"></span>
+                                    <span class="fa fa-pen"></span>
                                 </a>
                             </td>
                             <td>

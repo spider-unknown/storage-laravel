@@ -40,11 +40,13 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' =>'required'
+            'name' =>'required',
+            'price' =>'required',
         ]);
 
         $category = new Category;
         $category->name = $request->name;
+        $category->price = $request->price;
         $category->save();
         Session::flash('success' , 'You successfully created category!');
         return redirect()->route('category.index');
@@ -82,11 +84,17 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $this->validate($request,[
+            'name'=>'required',
+            'price' => 'required',
+        ]);
 //        if(Auth::user()->admin){
             $category = Category::find($id);
             $category->name = $request->name;
+            $category->price = $request->price;
             $category->save();
-            Session::flash('success','You successfully edited!');
+            Session::flash('success','You successfully edited category!');
 //        }
 //        else{
 //            Session::flash('error','You do not have enough permission!');
