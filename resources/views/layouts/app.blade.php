@@ -13,7 +13,8 @@
 
     <!-- Custom fonts for this template-->
     <link rel="stylesheet" type="text/css" href="{{asset('app/vendor/fontawesome-free/css/all.min.css')}}">
-    <link  href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
     <link href="{{asset('app/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
 
     <!-- Custom styles for this template-->
@@ -21,6 +22,7 @@
     <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('app/vendor/datatables/datatable.resp.css')}}"  rel="stylesheet"/>
 
     @yield('styles')
 </head>
@@ -31,76 +33,76 @@
 
     <!-- Sidebar -->
     @if(Auth::user())
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-        <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-            <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">SB Admin</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+            <div class="sidebar-heading">
+                Addons
             </div>
-            <div class="sidebar-brand-text mx-3">SB Admin <sup>2</div>
-        </a>
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('products.index')}}">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Products</span></a>
+            </li>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider my-0">
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('category.index')}}">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Categories</span></a>
+            </li>
 
-        <!-- Nav Item - Dashboard -->
-        <li class="nav-item active">
-            <a class="nav-link" href="index.html">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span></a>
-        </li>
-        <div class="sidebar-heading">
-            Addons
-        </div>
-        <!-- Nav Item - Tables -->
-        <li class="nav-item">
-            <a class="nav-link" href="{{route('products.index')}}">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Products</span></a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('type.index')}}">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Types</span></a>
+            </li>
 
-        <li class="nav-item">
-            <a class="nav-link" href="{{route('category.index')}}">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Categories</span></a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('storage.index')}}">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Storages</span></a>
+            </li>
 
-        <li class="nav-item">
-            <a class="nav-link" href="{{route('type.index')}}">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Types</span></a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('cars.index')}}">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Cars</span></a>
+            </li>
 
-        <li class="nav-item">
-            <a class="nav-link" href="{{route('storage.index')}}">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Storages</span></a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('cells.index')}}">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Cells</span></a>
+            </li>
 
-        <li class="nav-item">
-            <a class="nav-link" href="{{route('cars.index')}}">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Cars</span></a>
-        </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
 
-        <li class="nav-item">
-            <a class="nav-link" href="{{route('cells.index')}}">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Cells</span></a>
-        </li>
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
-
-        <!-- Sidebar Toggler (Sidebar) -->
-        <div class="text-center d-none d-md-inline">
-            <button class="rounded-circle border-0" id="sidebarToggle"></button>
-        </div>
-
-    </ul>
-    @endif
-    <!-- End of Sidebar -->
+        </ul>
+@endif
+<!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -129,12 +131,15 @@
                     @else
 
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->name }}</span>
-                                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                                <img class="img-profile rounded-circle"
+                                     src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                             </a>
                             <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
@@ -150,7 +155,8 @@
                                     {{ __('Logout') }}
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                      style="display: none;">
                                     @csrf
                                 </form>
                                 <div class="dropdown-divider"></div>
@@ -172,17 +178,14 @@
         </div>
         <!-- End of Main Content -->
 
-        <!-- Footer -->
-        <footer class="sticky-footer bg-white footer">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Logistic {{date('Y')}}</span>
-                </div>
-            </div>
-        </footer>
-        <!-- End of Footer -->
-
     </div>
+    <footer class="sticky-footer bg-white footer">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; Logistic {{date('Y')}}</span>
+            </div>
+        </div>
+    </footer>
     <!-- End of Content Wrapper -->
 
 </div>
@@ -194,7 +197,8 @@
 </a>
 
 <!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -221,20 +225,14 @@
 
 <!-- Custom scripts for all pages-->
 <script src="{{asset('app/js/sb-admin-2.min.js')}}"></script>
+<script src="{{ asset('js/toastr.min.js') }}"></script>
 
-<!-- Page level plugins -->
-<script src="{{asset('app/vendor/chart.js/Chart.min.js')}}"></script>
 
-<!-- Page level custom scripts -->
-<script src="{{asset('app/js/demo/chart-area-demo.')}}"></script>
-<script src="{{asset('app/js/demo/chart-pie-demo.js')}}"></script>
-</div>
-<script src="{{ asset('js/toastr.min.js') }}" ></script>
 <script src="{{asset('app/vendor/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('app/vendor/datatables/datatable.resp.js')}}"></script>
 <script src="{{asset('app/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
 
 <!-- Page level custom scripts -->
-<script src="{{asset('app/js/demo/datatables-demo.js')}}"></script>
 <script>
     toastr.options.closeButton = true;
     @if(Session::has('success'))
@@ -253,6 +251,13 @@
     toastr.info("{{Session::get('warning')}}");
     @endif
 
+</script>
+<script>
+    $(document).ready(function(){
+        $('#dataTable').DataTable({
+            responsive: true,
+        });
+    });
 </script>
 
 @yield('scripts')

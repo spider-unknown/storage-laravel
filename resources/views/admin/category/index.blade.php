@@ -10,7 +10,7 @@
             </a>
         </div>
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="dataTable" cellspacing="0">
                 <thead>
                 <th>Category name</th>
                 <th>Price</th>
@@ -18,34 +18,29 @@
                 <th>Delete</th>
                 </thead>
                 <tbody>
-                @if($categories->count()>0)
-                    @foreach($categories as $category)
-                        <tr>
-                            <td>
-                                {{$category->name}}
-                            </td>
-                            <td>
-                                {{$category->price}}
-                            </td>
-                            <td>
-                                <a href="{{route('category.edit' , ['id' => $category->id]) }}" class="btn btn-xs btn-info">
-                                    <span class="fa fa-pen"></span>
-                                </a>
-                            </td>
-                            <td>
-                                <a href="{{route('category.delete', ['id' => $category->id])}}" class="btn btn-xs btn-danger">
-                                    <span class="fa fa-trash"></span>
-                                </a>
-                            </td>
-                        </tr>
-                    @endforeach
-                @else
+                @foreach($categories as $category)
                     <tr>
-                        <th colspan="3">No categories yet!</th>
+                        <td>
+                            {{$category->name}}
+                        </td>
+                        <td>
+                            {{$category->price}}
+                        </td>
+                        <td>
+                            <a href="{{route('category.edit' , ['id' => $category->id]) }}" class="btn btn-xs btn-info">
+                                <span class="fa fa-pen"></span>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{route('category.delete', ['id' => $category->id])}}" class="btn btn-xs btn-danger">
+                                <span class="fa fa-trash"></span>
+                            </a>
+                        </td>
                     </tr>
-                @endif
+                @endforeach
                 </tbody>
             </table>
         </div>
     </div>
 @endsection
+
