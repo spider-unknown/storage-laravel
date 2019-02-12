@@ -109,7 +109,7 @@ class TypeController extends Controller
 
         Type::destroy($id);
 
-        Session::flash('success', 'Tag successfully deleted!');
+        Session::flash('success', 'Type successfully deleted!');
 
         return redirect()->back();
     }

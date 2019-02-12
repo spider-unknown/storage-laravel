@@ -85,7 +85,7 @@ class StorageController extends Controller
         $storage->name = $request->name;
         $storage->address = $request->address;
         $storage->save();
-        Session::flash('success','You successfully updated!');
+        Session::flash('success','You successfully updated storage!');
 //        }
 //        else{
 //            Session::flash('error','You do not have enough permission!');

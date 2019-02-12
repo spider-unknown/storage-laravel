@@ -32,9 +32,10 @@ class ProductsController extends Controller
 
         $categories = Category::all();
         $type = Type::all();
+        $cell = Cell::all();
 
-        if($categories->count() == 0 || $type->count() == 0){
-            Session::flash('info' , 'You must have some categories or types');
+        if($categories->count() == 0 || $type->count() == 0 || $cell->count() == 0){
+            Session::flash('info' , 'You must have some categories,types or cell!');
             return redirect()->back();
         }
 
@@ -76,7 +77,7 @@ class ProductsController extends Controller
             'depth' => $request->depth,
             'category_id' => $request->category_id,
             'cell_id' => $request->cell_id,
-            'image' => 'uploads/products/' . $image_new_name
+            'image' => '/uploads/products/' . $image_new_name
 
         ]);
 
@@ -164,7 +165,7 @@ class ProductsController extends Controller
         $product->types()->sync($request->types);
         $product->save();
 
-        Session::flash('success', 'You successfully updated post');
+        Session::flash('success', 'You successfully updated product');
 
         if(!$product->deleted_at){
             return redirect()->route('products.index');

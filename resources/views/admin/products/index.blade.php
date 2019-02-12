@@ -49,3 +49,10 @@
         </div>
     </div>
 @endsection
+@section('scripts')
+    <script>
+    $(document).ready(function(){
+        $('#dataTable').DataTable();
+    });
+    </script>
+@endsection

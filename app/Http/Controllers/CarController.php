@@ -33,7 +33,7 @@ class CarController extends Controller
         $storage = Storage::all();
 
         if($categories->count() == 0 || $type->count() == 0 || $storage->count() == 0){
-            Session::flash('info' , 'You must have some categories,types or cars');
+            Session::flash('info' , 'You must have some categories,types or storages');
             return redirect()->back();
         }
 
@@ -65,7 +65,7 @@ class CarController extends Controller
 
         $car->types() ->attach($request->types);
         $car->categories() ->attach($request->categories);
-        Session::flash('success','Successfully added');
+        Session::flash('success','Successfully added car');
         return redirect()->route('cars.index');
 
     }
@@ -123,7 +123,7 @@ class CarController extends Controller
         $car->categories()->sync($request->categories);
         $car->save();
 
-        Session::flash('success','Updated car');
+        Session::flash('success','Car updated successfully!');
         return redirect()->route('cars.index');
     }
 

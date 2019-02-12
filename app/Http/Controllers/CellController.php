@@ -33,8 +33,8 @@ class CellController extends Controller
         $type = Type::all();
         $storage = Storage::all();
 
-        if($categories->count() == 0 || $type->count() == 0){
-            Session::flash('info' , 'You must have some categories or types');
+        if($categories->count() == 0 || $type->count() == 0 || $storage->count() == 0){
+            Session::flash('info' , 'You must have some categories or storage');
             return redirect()->back();
         }
 
@@ -64,7 +64,7 @@ class CellController extends Controller
 
         $cell->types() ->attach($request->types);
         $cell->categories() ->attach($request->categories);
-        Session::flash('success','Successfully added');
+        Session::flash('success','Successfully added cell');
         return redirect()->route('cells.index');
     }
 
@@ -119,7 +119,7 @@ class CellController extends Controller
         $cell->categories()->sync($request->categories);
         $cell->save();
 
-        Session::flash('success','Updated cell');
+        Session::flash('success','You successfully updated cell');
         return redirect()->route('cells.index');
 
 
