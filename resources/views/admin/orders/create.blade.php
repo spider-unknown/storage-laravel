@@ -17,40 +17,32 @@
                 </div>
                 <div class="form-group">
                     <label for="storage">Select a storage</label>
-                    <select id="storage_id" name="storage_id" class="form-control" onchange="storage()">
+                    <select id="storage" name="storage_id" class="form-control">
+                        <option></option>
                         @foreach($storages as $storage)
                             <option value="{{$storage->id}}">{{$storage->name}}</option>
                         @endforeach
                     </select>
                 </div>
-                <?php
-                echo
-                "<script>e2
-                </script>";
-                ?>
-                <div class="form-group">
+                <div class="form-group" id="cellDiv">
                     <label for="cell">Select a cell</label>
                     <select id="cell" name="cell_id" class="form-control">
-                        @foreach($cells->where('storage_id', 2) as $cell)
-                        <option value="{{$cell->id}}">{{$cell->name}}</option>
-                        @endforeach
+
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="carDiv">
                     <label for="car">Select a car</label>
                     <select id="car" name="car_id" class="form-control">
-                        @foreach($cars as $car)
-                            <option value="{{$car->id}}">{{$car->model}}</option>
-                        @endforeach
+
                     </select>
                 </div>
 
-                <div class="form-check">
+                <div class="form-check" id="productDiv">
                     <label for="products" >Select products</label>
                     @foreach($products as $product)
                         <div class="checkbox">
                             <label class="form-check-label">
-                                <input type="checkbox" name="products[]" class="form-check-input" value="{{$product->id}}">
+                                <input type="checkbox" id="product" name="products[]" class="form-check-input" value="{{$product->id}}">
                                 {{$product->name}}
                             </label>
                         </div>
@@ -83,4 +75,105 @@
         </div>
     </div>
 @endsection
+@section("scripts")
+    <script>
+        function hideAll(){
+            $('#cellDiv').hide();
+            $('#carDiv').hide();
+            $('#productDiv').hide();
+        }
 
+        hideAll();
+
+        $(document).ready(function(){
+            $('#storage').on('change', function(){
+                if(this.value){
+                    $.ajax(
+                        {
+                            url: '/api/cells/by/storage/' + this.value,
+                            type: 'GET',
+                            success: function(res) {
+                                $('#cell').empty();
+                                if(res.length > 0){
+                                    $('#cellDiv').show();
+                                    var option = document.createElement("option");
+                                    $('#cell').append(option);
+                                    for(var i = 0 ; i < res.length; i++){
+                                        var option = document.createElement("option");
+                                        option.value = res[i].id;
+                                        option.innerText = res[i].name;
+                                        $('#cell').append(option);
+                                    }
+                                }else{
+                                    toastr.warning('Attention!' ,'There is no cells in this storage!');
+                                }
+                            },
+                            error : function(error){
+                                toastr.error('Error!', 'Information not fetched!');
+                                hideAll();
+                            }
+                        }
+                    );
+                    $.ajax(
+                        {
+                            url: '/api/cars/by/storage/' + this.value,
+                            type: 'GET',
+                            success: function(res) {
+                                $('#car').empty();
+                                if(res.length > 0){
+                                    $('#carDiv').show();
+                                    var option = document.createElement("option");
+                                    $('#car').append(option);
+                                    for(var i = 0 ; i < res.length; i++){
+                                        var option = document.createElement("option");
+                                        option.value = res[i].id;
+                                        option.innerText = res[i].model;
+                                        $('#car').append(option);
+                                    }
+                                }else{
+                                    toastr.warning('Attention!' ,'There is no cars in this storage!');
+                                }
+                            },
+                            error : function(error){
+                                toastr.error('Error!', 'Information not fetched!');
+                                hideAll();
+                            }
+                        }
+                    )
+
+                }
+            });
+            
+            $('#cell').on('change', function () {
+                if (this.value) {
+                    $.ajax({
+                        url: '/api/products/by/cell/' + this.value,
+                        type: 'GET',
+                        success: function (res) {
+                            $('#product').empty();
+                            if (res.length > 0) {
+                                $('#productDiv').show();
+                                var checkbox = document.createElement("checkbox");
+                                $('#product').append(checkbox);
+                                for (var i = 0; i < res.length; i++) {
+                                    var checkbox = document.createElement("checkbox");
+                                    checkbox.value = res[i].id;
+                                    checkbox.innerText = res[i].name;
+                                    $('#product').append(checkbox);
+                                }
+                            }
+                            else {
+                                toastr.warning('Attention!', 'There is no products in this cells!');
+                            }
+                        },
+                        error: function (error) {
+                            toastr.error('Error!', 'Info not fetched');
+                            hide.all()
+                        }
+                    })
+                }
+            });
+        });
+
+    </script>
+@endsection

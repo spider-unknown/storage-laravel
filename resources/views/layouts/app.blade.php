@@ -260,13 +260,6 @@
             responsive: true,
         });
     });
-
-
-    function storage(){
-        var e = document.getElementById("storage_id");
-        var e2 = e.options[e.selectedIndex].value;
-        console.log(e2);}
-
 </script>
 
 

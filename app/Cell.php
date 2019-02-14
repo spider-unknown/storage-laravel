@@ -17,5 +17,8 @@ class Cell extends Model
         return $this->belongsToMany('App\Category','cell_category','cell_id','category_id');
 
     }
+    public function products(){
+        return $this->hasMany('App\Product');
+    }
 
 }
