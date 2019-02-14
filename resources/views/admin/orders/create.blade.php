@@ -1,10 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
     @include('admin.includes.errors')
-
-
     <div class="card card-default">
         <div class="card-header">
             Create new order
@@ -17,6 +14,27 @@
                 <div class="form-group">
                     <label for="location">Location</label>
                     <input type="text" name='location' class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="storage">Select a storage</label>
+                    <select id="storage_id" name="storage_id" class="form-control" onchange="storage()">
+                        @foreach($storages as $storage)
+                            <option value="{{$storage->id}}">{{$storage->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <?php
+                echo
+                "<script>e2
+                </script>";
+                ?>
+                <div class="form-group">
+                    <label for="cell">Select a cell</label>
+                    <select id="cell" name="cell_id" class="form-control">
+                        @foreach($cells->where('storage_id', 2) as $cell)
+                        <option value="{{$cell->id}}">{{$cell->name}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="car">Select a car</label>
@@ -65,3 +83,4 @@
         </div>
     </div>
 @endsection
+

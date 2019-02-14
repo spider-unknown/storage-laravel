@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Car;
+use App\Cell;
+use App\Storage;
 use App\Order;
 use App\Product;
 use Illuminate\Http\Request;
@@ -25,8 +27,10 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        $storages = Storage::all();
+        $cells = Cell::all();
         $products = Product::all();
         $cars = Car::all();
 
@@ -34,7 +38,7 @@ class OrderController extends Controller
             Session::flash('info' , 'You must have some product and car!');
             return redirect()->back();
         }
-        return view('admin.orders.create', compact('products', 'cars'));
+        return view('admin.orders.create', compact('products', 'cars', 'storages','cells'));
 
     }
 
@@ -85,7 +89,16 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $order = Order::findOrFail($id);
+
+        return view('admin.orders.edit')
+            ->with([
+                'order' => $order,
+                'storages' => Storage::all(),
+                'cars' => Car::all(),
+                'products' => Product::all(),
+            ]);
+
     }
 
     /**
@@ -97,7 +110,20 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $order = Order::findOrFail($id);
+        $this->validate($request,[
+            'location' => 'required|max:255',
+            'way_long' => 'required',
+            'car_id' => 'required',
+        ]);
+
+        $order->location = $request->location;
+        $order->way_long = $request->way_long;
+        $order->car_id = $request->car_id;
+        $order->products()->sync($request->products);
+        $order->save();
+        Session::flash('success', 'You successfully edited your order');
+        return redirect()->route('orders.index');
     }
 
     /**
@@ -108,6 +134,7 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Order::destroy($id);
+        return redirect()->back();
     }
 }

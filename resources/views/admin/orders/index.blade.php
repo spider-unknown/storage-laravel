@@ -27,14 +27,14 @@
                             {{$order->way_long}}
                         </td>
                         <td>
-                            {{--<a href="{{route('order.edit' , ['id' => $order->id]) }}" class="btn btn-xs btn-info">--}}
-                                {{--<span class="fa fa-pen"></span>--}}
-                            {{--</a>--}}
+                            <a href="{{route('order.edit' , ['id' => $order->id]) }}" class="btn btn-xs btn-info">
+                                <span class="fa fa-pen"></span>
+                            </a>
                         </td>
                         <td>
-                            {{--<a href="{{route('order.delete', ['id' => $order->id])}}" class="btn btn-xs btn-danger">--}}
-                                {{--<span class="fa fa-trash"></span>--}}
-                            {{--</a>--}}
+                            <a href="{{route('order.delete', ['id' => $order->id])}}" class="btn btn-xs btn-danger">
+                                <span class="fa fa-trash"></span>
+                            </a>
                         </td>
                     </tr>
                 @endforeach

@@ -93,22 +93,22 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{route('orders.index')}}">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-fw fa-shopping-cart"></i>
                     <span>Orders</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{route('users.index')}}">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-fw fa-user"></i>
                     <span>Users</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{route('permissions.index')}}">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-fw fa-user-lock"></i>
                     <span>Permissions</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{route('roles.index')}}">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-fw fa-key"></i>
                     <span>Roles</span></a>
             </li>
 
@@ -217,24 +217,6 @@
 </a>
 
 <!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Bootstrap core JavaScript-->
 <script src="{{asset('app/vendor/jquery/jquery.min.js')}}"></script>
@@ -278,7 +260,15 @@
             responsive: true,
         });
     });
+
+
+    function storage(){
+        var e = document.getElementById("storage_id");
+        var e2 = e.options[e.selectedIndex].value;
+        console.log(e2);}
+
 </script>
+
 
 @yield('scripts')
 

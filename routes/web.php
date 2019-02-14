@@ -71,12 +71,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'clearance', 'isAdmi
     Route::get('/cars',  ['uses' => 'CarController@index',  'as' => 'cars.index']);
     Route::get('/car/create',  ['uses' => 'CarController@create',  'as' => 'car.create']);
     Route::post('/car/store',  ['uses' => 'CarController@store',  'as' => 'car.store']);
-    Route::get('/car/edit/{id}',  ['uses' => 'CarController@edit',  'as' => 'car.edit',  ]);
-    Route::post('/car/update/{id}',  ['uses' => 'CarController@update',  'as' => 'car.update',  ]);
-    Route::get('/car/delete/{id}',  ['uses' => 'CarController@destroy',  'as' => 'car.delete',  ]);
+    Route::get('/car/edit/{id}',  ['uses' => 'CarController@edit',  'as' => 'car.edit']);
+    Route::post('/car/update/{id}',  ['uses' => 'CarController@update',  'as' => 'car.update']);
+    Route::get('/car/delete/{id}',  ['uses' => 'CarController@destroy',  'as' => 'car.delete']);
 
     Route::get('/orders', ['uses' => 'OrderController@index', 'as' => 'orders.index']);
     Route::get('/orders/create', ['uses' => 'OrderController@create', 'as' => 'order.create']);
     Route::post('/orders/store', ['uses' => 'OrderController@store', 'as' => 'order.store']);
+    Route::get('/orders/edit/{id}',['uses' => 'OrderController@edit', 'as' => 'order.edit']);
+    Route::post('/orders/update/{id}',['uses' => 'OrderController@update', 'as' => 'order.update']);
+    Route::get('/orders/delete/{id}', ['uses' => 'OrderController@destroy', 'as' => 'order.delete']);
 
 });

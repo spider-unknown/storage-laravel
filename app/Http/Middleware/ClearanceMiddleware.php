@@ -26,20 +26,20 @@ class ClearanceMiddleware {
         $error = false;
 
 
-        if ($req == (route('product.create')))//If user is creating a post
+        if ($req == (route('order.create')))//If user is creating a post
         {
-            if (!Auth::user()->hasPermissionTo('Create Product'))
+            if (!Auth::user()->hasPermissionTo('Create Order'))
             {
                 $error = true;
             }
-        }else if ($req == route('product.edit', ['id'=>$request->id])) //If user is editing a post
+        }else if ($req == route('order.edit', ['id'=>$request->id])) //If user is editing a post
         {
-            if (!Auth::user()->hasPermissionTo('Edit Product')) {
+            if (!Auth::user()->hasPermissionTo('Edit Order')) {
                 $error = true;
             }
-        }else if ($req == route('product.delete', ['id'=>$request->id])) //If user is deleting a post
+        }else if ($req == route('order.delete', ['id'=>$request->id])) //If user is deleting a post
         {
-            if (!Auth::user()->hasPermissionTo('Delete Product')) {
+            if (!Auth::user()->hasPermissionTo('Delete Order')) {
                 $error = true;
             }
         }
