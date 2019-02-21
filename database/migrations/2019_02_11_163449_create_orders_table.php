@@ -16,7 +16,10 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('car_id')->unsigned();
-            $table->foreign('car_id')->references('id')->on('cars');
+            $table->foreign('car_id')
+                ->references('id')
+                ->on('cars')
+                ->onDelete('cascade');
             $table->string('location');
             $table->double('way_long');
             $table->timestamps();

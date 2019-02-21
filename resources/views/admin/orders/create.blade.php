@@ -143,7 +143,7 @@
 
                 }
             });
-            
+
             $('#cell').on('change', function () {
                 if (this.value) {
                     $.ajax({
