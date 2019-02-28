@@ -18,10 +18,6 @@ class Product extends Model
         'deleted_at',
     ];
 
-    public function types(){
-        return $this->belongsToMany('App\Type');
-    }
-
     public function category()
     {
         return $this->belongsTo('App\Category');

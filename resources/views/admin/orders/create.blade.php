@@ -7,7 +7,7 @@
             Create new order
         </div>
         <div class="card-body">
-            <form action="{{ route('order.store') }}" method="POST" enctype="multipart/form-data" >
+            <form action="{{ route('order.store') }}" method="POST" enctype="multipart/form-data">
 
                 {{ csrf_field() }}
 
@@ -33,26 +33,20 @@
                 <div class="form-group" id="carDiv">
                     <label for="car">Select a car</label>
                     <select id="car" name="car_id" class="form-control">
-
                     </select>
                 </div>
 
                 <div class="form-check" id="productDiv">
-                    <label for="products" >Select products</label>
-                    @foreach($products as $product)
-                        <div class="checkbox">
-                            <label class="form-check-label">
-                                <input type="checkbox" id="product" name="products[]" class="form-check-input" value="{{$product->id}}">
-                                {{$product->name}}
-                            </label>
-                        </div>
-                    @endforeach
+                    <label for="products">Select products</label>
+                    <div class="checkbox" id="productsCheckBox">
+
+                    </div>
                 </div>
 
 
                 <div class="form-group">
                     <label for="width">Way Long</label>
-                    <input type="number" name='way_long' class="form-control">
+                    <input type="number" name='way_long' class="form-control" id="wayLong">
                 </div>
 
                 {{--<div class="form-group">--}}
@@ -77,7 +71,7 @@
 @endsection
 @section("scripts")
     <script>
-        function hideAll(){
+        function hideAll() {
             $('#cellDiv').hide();
             $('#carDiv').hide();
             $('#productDiv').hide();
@@ -85,30 +79,30 @@
 
         hideAll();
 
-        $(document).ready(function(){
-            $('#storage').on('change', function(){
-                if(this.value){
+        $(document).ready(function () {
+            $('#storage').on('change', function () {
+                if (this.value) {
                     $.ajax(
                         {
                             url: '/api/cells/by/storage/' + this.value,
                             type: 'GET',
-                            success: function(res) {
+                            success: function (res) {
                                 $('#cell').empty();
-                                if(res.length > 0){
+                                if (res.length > 0) {
                                     $('#cellDiv').show();
                                     var option = document.createElement("option");
                                     $('#cell').append(option);
-                                    for(var i = 0 ; i < res.length; i++){
+                                    for (var i = 0; i < res.length; i++) {
                                         var option = document.createElement("option");
                                         option.value = res[i].id;
                                         option.innerText = res[i].name;
                                         $('#cell').append(option);
                                     }
-                                }else{
-                                    toastr.warning('Attention!' ,'There is no cells in this storage!');
+                                } else {
+                                    toastr.warning('Attention!', 'There is no cells in this storage!');
                                 }
                             },
-                            error : function(error){
+                            error: function (error) {
                                 toastr.error('Error!', 'Information not fetched!');
                                 hideAll();
                             }
@@ -118,23 +112,23 @@
                         {
                             url: '/api/cars/by/storage/' + this.value,
                             type: 'GET',
-                            success: function(res) {
+                            success: function (res) {
                                 $('#car').empty();
-                                if(res.length > 0){
+                                if (res.length > 0) {
                                     $('#carDiv').show();
                                     var option = document.createElement("option");
                                     $('#car').append(option);
-                                    for(var i = 0 ; i < res.length; i++){
+                                    for (var i = 0; i < res.length; i++) {
                                         var option = document.createElement("option");
                                         option.value = res[i].id;
                                         option.innerText = res[i].model;
                                         $('#car').append(option);
                                     }
-                                }else{
-                                    toastr.warning('Attention!' ,'There is no cars in this storage!');
+                                } else {
+                                    toastr.warning('Attention!', 'There is no cars in this storage!');
                                 }
                             },
-                            error : function(error){
+                            error: function (error) {
                                 toastr.error('Error!', 'Information not fetched!');
                                 hideAll();
                             }
@@ -143,25 +137,34 @@
 
                 }
             });
-            
+
             $('#cell').on('change', function () {
                 if (this.value) {
                     $.ajax({
                         url: '/api/products/by/cell/' + this.value,
                         type: 'GET',
                         success: function (res) {
-                            $('#product').empty();
-                            if (res.length > 0) {
+                            $('#productDiv').empty();
+                            if (res.products.length > 0) {
                                 $('#productDiv').show();
-                                var checkbox = document.createElement("checkbox");
-                                $('#product').append(checkbox);
-                                for (var i = 0; i < res.length; i++) {
-                                    var checkbox = document.createElement("checkbox");
-                                    checkbox.value = res[i].id;
-                                    checkbox.innerText = res[i].name;
-                                    $('#product').append(checkbox);
+                                var title = "Select Products";
+                                $('#productDiv').append(title);
+                                for (var i = 0; i < res.products.length; i++) {
+                                    var div = document.createElement("div");
+                                    div.className = "checkbox";
+                                    $('#productDiv').append(div);
+                                    var checkbox = document.createElement('input');
+                                    checkbox.name = "products[]";
+                                    checkbox.id = "checkss";
+                                    checkbox.type = "checkbox";
+                                    checkbox.value = res.products[i].id;
+                                    var text = res.products[i].name;
+                                    $('#productDiv').append(checkbox);
+                                    $('#productDiv').append(text);
+
                                 }
                             }
+
                             else {
                                 toastr.warning('Attention!', 'There is no products in this cells!');
                             }
@@ -170,10 +173,18 @@
                             toastr.error('Error!', 'Info not fetched');
                             hide.all()
                         }
+
                     })
                 }
             });
-        });
 
+            $('#checkss').change (function () {
+                if ($(this).is(':checked')) {
+                    console.log($(this).val() + ' is now checked');
+                } else {
+                    console.log($(this).val() + ' is now unchecked');
+                }
+            });
+        });
     </script>
 @endsection

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Cell;
 use App\Product;
-use App\Type;
 use App\Category;
 use Illuminate\Http\Request;
 use Session;
@@ -35,17 +34,14 @@ class ProductController extends Controller
     {
 
         $categories = Category::all();
-        $type = Type::all();
         $cell = Cell::all();
-
-        if($categories->count() == 0 || $type->count() == 0 || $cell->count() == 0){
+        if($categories->count() == 0 || $cell->count() == 0){
             Session::flash('info' , 'You must have some categories,types or cell!');
             return redirect()->back();
         }
 
         return view('admin.products.create')
             ->with('categories',$categories)
-            ->with('types' , Type::all())
             ->with('cells', Cell::all());
     }
 
@@ -61,7 +57,6 @@ class ProductController extends Controller
             'name' => 'required|max:255',
             'code' => 'required',
             'category_id' => 'required',
-            'types' =>'required',
             'image' => 'required|image',
             'width' => 'required',
             'height' => 'required',
@@ -84,8 +79,6 @@ class ProductController extends Controller
             'image' => '/uploads/products/' . $image_new_name
 
         ]);
-
-        $product->types() ->attach($request->types);
 
         Session::flash('success','Product created successfully!');
         return redirect()->route('products.index');
@@ -123,7 +116,6 @@ class ProductController extends Controller
             ->with([
                 'product' => $product,
                 'categories' => $categories,
-                'types' => Type::all(),
                 'cells' => Cell::all(),
             ]);
     }
@@ -144,7 +136,6 @@ class ProductController extends Controller
             'code' => 'required',
             'category_id' => 'required',
             'cell_id' => 'required',
-            'types' =>'required',
             'image' => 'required|image',
             'width' => 'required',
             'height' => 'required',
@@ -166,7 +157,6 @@ class ProductController extends Controller
         $product->depth=$request->depth;
         $product->category_id=$request->category_id;
         $product->cell_id=$request->cell_id;
-        $product->types()->sync($request->types);
         $product->save();
 
         Session::flash('success', 'You successfully updated product');

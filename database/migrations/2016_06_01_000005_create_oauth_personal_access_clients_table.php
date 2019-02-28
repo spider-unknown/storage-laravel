@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCellTypeTable extends Migration
+class CreateOauthPersonalAccessClientsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateCellTypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('cell_type', function (Blueprint $table) {
+        Schema::create('oauth_personal_access_clients', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('cell_id')->unsigned();
-            $table->foreign('cell_id')->references('id')->on('cells')->onDelete('cascade');
-            $table->integer('type_id')->unsigned();
-            $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
+            $table->unsignedInteger('client_id')->index();
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateCellTypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cell_type');
+        Schema::dropIfExists('oauth_personal_access_clients');
     }
 }

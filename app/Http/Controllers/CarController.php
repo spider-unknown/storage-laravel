@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Car;
 use App\Storage;
 use App\Category;
-use App\Type;
 use Session;
 use Illuminate\Http\Request;
 
@@ -30,17 +29,15 @@ class CarController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $type = Type::all();
         $storage = Storage::all();
 
-        if($categories->count() == 0 || $type->count() == 0 || $storage->count() == 0){
+        if($categories->count() == 0 || $storage->count() == 0){
             Session::flash('info' , 'You must have some categories,types or storages');
             return redirect()->back();
         }
 
         return view('admin.cars.create')
             ->with('categories',$categories)
-            ->with('types' , $type)
             ->with('storages',$storage);
     }
 
@@ -58,13 +55,13 @@ class CarController extends Controller
             'storage_id' => 'required',
         ]);
 
+
         $car = Car::create([
             'status' => $request->status,
             'model' => $request->model,
             'storage_id' => $request->storage_id,
         ]);
 
-        $car->types() ->attach($request->types);
         $car->categories() ->attach($request->categories);
         Session::flash('success','Successfully added car');
         return redirect()->route('cars.index');
@@ -96,7 +93,6 @@ class CarController extends Controller
             ->with([
                 'car' => $car,
                 'categories' => Category::all(),
-                'types' => Type::all(),
                 'storages' => Storage::all(),
             ]);
     }
@@ -120,7 +116,6 @@ class CarController extends Controller
         $car->status=$request->status;
         $car->model=$request->model;
         $car->storage_id=$request->storage_id;
-        $car->types()->sync($request->types);
         $car->categories()->sync($request->categories);
         $car->save();
 

@@ -13,11 +13,6 @@ class Car extends Model
         return $this->belongsTo('App/Storage');
     }
 
-    public function types(){
-        return $this->belongsToMany('App\Type');
-
-    }
-
     public function categories()
     {
         return $this->belongsToMany('App\Category');

@@ -31,23 +31,6 @@
                     </select>
                 </div>
                 <div class="form-check">
-                    <label for="types" >Select types</label>
-                    @foreach($types as $type)
-                        <div class="checkbox">
-                            <label class="form-check-label">
-                                <input type="checkbox" name="types[]" class="form-check-input" value="{{$type->id}}"
-                                       @foreach($cell->types as $innerType)
-                                       @if($innerType->id == $type->id)
-                                       checked
-                                        @endif
-                                        @endforeach
-                                >
-                                {{$type->name}}
-                            </label>
-                        </div>
-                    @endforeach
-                </div>
-                <div class="form-check">
                     <label for="types" >Select categories</label>
                     @foreach($categories as $category)
                         <div class="checkbox">

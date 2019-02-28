@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Cell;
 use App\Category;
 use App\Storage;
-use App\Type;
 use Session;
 
 use Illuminate\Http\Request;
@@ -30,17 +29,15 @@ class CellController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $type = Type::all();
         $storage = Storage::all();
 
-        if($categories->count() == 0 || $type->count() == 0 || $storage->count() == 0){
+        if($categories->count() == 0 || $storage->count() == 0){
             Session::flash('info' , 'You must have some categories or storage');
             return redirect()->back();
         }
 
         return view('admin.cells.create')
             ->with('categories',$categories)
-            ->with('types' , $type)
             ->with('storages',$storage);
     }
 
@@ -62,7 +59,6 @@ class CellController extends Controller
             'storage_id' => $request->storage_id,
             ]);
 
-        $cell->types() ->attach($request->types);
         $cell->categories() ->attach($request->categories);
         Session::flash('success','Successfully added cell');
         return redirect()->route('cells.index');
@@ -93,7 +89,6 @@ class CellController extends Controller
             ->with([
                 'cell' => $cell,
                 'categories' => Category::all(),
-                'types' => Type::all(),
                 'storages' => Storage::all(),
             ]);
     }
@@ -115,7 +110,6 @@ class CellController extends Controller
 
         $cell->name=$request->name;
         $cell->storage_id=$request->storage_id;
-        $cell->types()->sync($request->types);
         $cell->categories()->sync($request->categories);
         $cell->save();
 

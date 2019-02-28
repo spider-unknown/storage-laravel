@@ -64,3 +64,106 @@
         </div>
     </div>
 @endsection
+@section("scripts")
+    <script>
+        function hideAll(){
+            $('#cellDiv').hide();
+            $('#carDiv').hide();
+            $('#productDiv').hide();
+        }
+
+        hideAll();
+
+        $(document).ready(function(){
+            $('#storage').on('change', function(){
+                if(this.value){
+                    $.ajax(
+                        {
+                            url: '/api/cells/by/storage/' + this.value,
+                            type: 'GET',
+                            success: function(res) {
+                                $('#cell').empty();
+                                if(res.length > 0){
+                                    $('#cellDiv').show();
+                                    var option = document.createElement("option");
+                                    option.value =
+                                    $('#cell').append(option);
+                                    for(var i = 0 ; i < res.length; i++){
+                                        var option = document.createElement("option");
+                                        option.value = res[i].id;
+                                        option.innerText = res[i].name;
+                                        $('#cell').append(option);
+                                    }
+                                }else{
+                                    toastr.warning('Attention!' ,'There is no cells in this storage!');
+                                }
+                            },
+                            error : function(error){
+                                toastr.error('Error!', 'Information not fetched!');
+                                hideAll();
+                            }
+                        }
+                    );
+                    $.ajax(
+                        {
+                            url: '/api/cars/by/storage/' + this.value,
+                            type: 'GET',
+                            success: function(res) {
+                                $('#car').empty();
+                                if(res.length > 0){
+                                    $('#carDiv').show();
+                                    var option = document.createElement("option");
+                                    $('#car').append(option);
+                                    for(var i = 0 ; i < res.length; i++){
+                                        var option = document.createElement("option");
+                                        option.value = res[i].id;
+                                        option.innerText = res[i].model;
+                                        $('#car').append(option);
+                                    }
+                                }else{
+                                    toastr.warning('Attention!' ,'There is no cars in this storage!');
+                                }
+                            },
+                            error : function(error){
+                                toastr.error('Error!', 'Information not fetched!');
+                                hideAll();
+                            }
+                        }
+                    )
+
+                }
+            });
+
+            $('#cell').on('change', function () {
+                if (this.value) {
+                    $.ajax({
+                        url: '/api/products/by/cell/' + this.value,
+                        type: 'GET',
+                        success: function (res) {
+                            $('#product').empty();
+                            if (res.length > 0) {
+                                $('#productDiv').show();
+                                var checkbox = document.createElement("checkbox");
+                                $('#product').append(checkbox);
+                                for (var i = 0; i < res.length; i++) {
+                                    var checkbox = document.createElement("checkbox");
+                                    checkbox.value = res[i].id;
+                                    checkbox.innerText = res[i].name;
+                                    $('#product').append(checkbox);
+                                }
+                            }
+                            else {
+                                toastr.warning('Attention!', 'There is no products in this cells!');
+                            }
+                        },
+                        error: function (error) {
+                            toastr.error('Error!', 'Info not fetched');
+                            hide.all()
+                        }
+                    })
+                }
+            });
+        });
+
+    </script>
+@endsection

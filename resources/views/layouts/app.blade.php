@@ -69,12 +69,6 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{route('type.index')}}">
-                    <i class="fas fa-fw fa-adjust"></i>
-                    <span>Types</span></a>
-            </li>
-
-            <li class="nav-item">
                 <a class="nav-link" href="{{route('storage.index')}}">
                     <i class="fas fa-fw fa-archive"></i>
                     <span>Storages</span></a>

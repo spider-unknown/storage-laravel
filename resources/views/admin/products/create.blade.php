@@ -40,18 +40,6 @@
                     </select>
                 </div>
 
-                <div class="form-check">
-                    <label for="types" >Select types</label>
-                    @foreach($types as $type)
-                        <div class="checkbox">
-                            <label class="form-check-label">
-                                <input type="checkbox" name="types[]" class="form-check-input" value="{{$type->id}}">
-                                {{$type->name}}
-                            </label>
-                        </div>
-                    @endforeach
-                </div>
-
                 <div class="form-group">
                     <label for="code">Code</label>
                     <input type="text" name='code' class="form-control">
